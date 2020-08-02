@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>Follow Mouse</title>
+     <link rel="stylesheet" href="main.css">
+</head>
+<body onload = "followMouse();">
+
+     <img id="flyimg" src="fly_walking0.png"/>
+     <img id="flyimg2" src="fly_singing0.png"/>
+
+     <script type="text/javascript">
+
+     var $ = document.querySelector.bind(document);
+     var $on = document.addEventListener.bind(document);
+
+     var xmouse, ymouse;
+     $on('mousemove', function (e) {
+          xmouse = e.clientX || e.pageX;
+          ymouse = e.clientY || e.pageY;
+     });
+
+     var flyimg = $('#flyimg');
+     var flyimg2 = $('#flyimg2');
+     flyimg2.style.display='none';
+
+     var x = void 0,
+          y = void 0,
+          dx = void 0,
+          dy = void 0,
+          vx = 0.025,
+          vy = 0.025,
+          tx = 0,
+          ty = 0,
+          ang = 0,
+          xMouseShift = -20,
+          yMouseShift = -20,
+          key = -1;
+
+     var followMouse = function followMouse() {
+          key = requestAnimationFrame(followMouse);
+
+          if(!x || !y) {
+               x = xmouse;
+               y = ymouse;
+          } else {
+               dx = (xmouse+xMouseShift - x);
+               dy = (ymouse+yMouseShift - y);
+               if(Math.abs(dx) + Math.abs(dy) > 50) {
+                    x += dx*vx;
+                    y += dy*vy;
+                    flyimg.style.display='inline';
+                    flyimg2.style.display='none';
+               } else {
+                    flyimg.style.display='none';
+                    flyimg2.style.display='inline';
+               }
+          }
+          ang = angle(dx,dy)+90
+          flyimg.style.left = x + 'px';
+          flyimg.style.top = y + 'px';
+          flyimg.style.transform = 'rotate('+ang+'deg)';
+          flyimg2.style.left = x + 'px';
+          flyimg2.style.top = y + 'px';
+          flyimg2.style.transform = 'rotate('+ang+'deg)';
+     };
+
+     function angle(dx,dy) {
+     var theta = Math.atan2(dy, dx);
+     theta *= 180 / Math.PI;
+     return theta;
+     };
+
+     </script>
+
+</body>
+
+</html>

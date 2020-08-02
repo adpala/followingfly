@@ -1,0 +1,23 @@
+body {
+    background: #161616;
+}
+
+#flyimg{
+    position: absolute;
+    width: 5%;
+    height: 5%;
+    /* transition: 0.1s;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+    animation: animate 5s linear infinite; */
+}
+
+#flyimg2{
+    position: absolute;
+    width: 5%;
+    height: 5%;
+    /* transition: 0.1s;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+    animation: animate 5s linear infinite; */
+}
